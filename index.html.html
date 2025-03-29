@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>槓桿跟單計算機</title>
+    <script>
+        function calculateLeverage() {
+            let opponentCapital = parseFloat(document.getElementById("opponentCapital").value);
+            let opponentLeverage = parseFloat(document.getElementById("opponentLeverage").value);
+            let opponentPositionValue = parseFloat(document.getElementById("opponentPositionValue").value);
+            let opponentSize = parseFloat(document.getElementById("opponentSize").value);
+            let entryPrice = parseFloat(document.getElementById("entryPrice").value);
+            let yourCapital = parseFloat(document.getElementById("yourCapital").value);
+            let yourLeverage = parseFloat(document.getElementById("yourLeverage").value);
+
+            let followRatio = yourCapital / opponentCapital;
+            let yourPositionValue = followRatio * opponentPositionValue;
+            let yourMargin = yourPositionValue / yourLeverage;
+            let yourSize = yourPositionValue / entryPrice;
+
+            document.getElementById("followRatio").innerText = (followRatio * 100).toFixed(2) + "%";
+            document.getElementById("yourPositionValue").innerText = "$" + yourPositionValue.toFixed(2);
+            document.getElementById("yourMargin").innerText = "$" + yourMargin.toFixed(2);
+            document.getElementById("yourSize").innerText = yourSize.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <h2>槓桿跟單計算機</h2>
+    <label>對方本金 ($):</label>
+    <input type="number" id="opponentCapital" value="19257.81"><br>
+    <label>對方槓桿 (x):</label>
+    <input type="number" id="opponentLeverage" value="10"><br>
+    <label>對方倉位價值 ($):</label>
+    <input type="number" id="opponentPositionValue" value="8623.23"><br>
+    <label>對方 Size (幣數):</label>
+    <input type="number" id="opponentSize" value="3750.7"><br>
+    <label>入場價格 ($):</label>
+    <input type="number" id="entryPrice" value="2.3078"><br>
+    <label>你的本金 ($):</label>
+    <input type="number" id="yourCapital" value="900"><br>
+    <label>你的槓桿 (x):</label>
+    <input type="number" id="yourLeverage" value="75"><br>
+    <button onclick="calculateLeverage()">計算</button>
+    <h3>計算結果:</h3>
+    <p>跟單比例: <span id="followRatio">0%</span></p>
+    <p>你的倉位價值: <span id="yourPositionValue">$0.00</span></p>
+    <p>你的保證金: <span id="yourMargin">$0.00</span></p>
+    <p>你的 Size: <span id="yourSize">0</span></p>
+</body>
+</html>
